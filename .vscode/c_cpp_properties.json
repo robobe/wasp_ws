@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/humble/include/**",
+        "/home/user/wasp_ws/src/mavros/libmavconn/include/**",
+        "/home/user/wasp_ws/src/mavros/mavros/include/**",
+        "/home/user/wasp_ws/src/mavros/mavros_extras/include/**",
+        "/home/user/wasp_ws/src/mavros/mavros_msgs/include/**",
+        "/home/user/wasp_ws/install/mavros_msgs/include/mavros_msgs/**",
+        "/usr/include/**",
+        "/home/user/wasp_ws/src/tutorials/cpp_tutrial_pkg/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

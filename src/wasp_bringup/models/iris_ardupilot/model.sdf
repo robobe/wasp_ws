@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<sdf version="1.6">
+  <!-- <model name="iris_with_ardupilot">
+    <include>
+      <uri>model://box_target_green</uri>
+      <pose>0 0 1 0 0 0</pose>
+      <static>true</static>
+    </include>
+
+    <include>
+      <uri>model://gimbal_small_2d</uri>
+      <pose>0 -0.01 0.070 1.57 0 0</pose>    
+    </include>
+
+    <joint name="gimbal_joint" type="revolute">
+      <parent>box_target_green::link</parent>
+      <child>gimbal_small_2d::base_link</child>
+      <axis>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    
+
+  </model> -->
+
+  <model name="iris_with_ardupilot">
+    <include>
+      <uri>model://iris_with_standoffs</uri>
+    </include>
+
+    <include>
+      <uri>model://gimbal_small_2d_new</uri>
+      <pose>0 -0.01 0.070 1.57 0 0</pose>    
+    </include>
+
+    <joint name="gimbal_joint" type="fixed">
+      <parent>iris_with_standoffs::base_link</parent>
+      <child>gimbal_small_2d::base_link</child>
+      <axis>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <ros2_control name="GazeboSystem" type="system">
+      <hardware>
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      </hardware>
+      <joint name="gimbal_small_2d::tilt_joint">
+          <command_interface name="position"/>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+          <state_interface name="effort"/>
+      </joint>
+  </ros2_control>
+  <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>/home/user/wasp_ws/src/wasp_bringup/config/position.yaml</parameters>
+  </plugin>
+  </model>
+</sdf>
+
+<!--
+gz topic -p /gazebo/default/iris_with_ardupilot/gimbal_tilt_cmd -m "data:'3.14'"
+ -->

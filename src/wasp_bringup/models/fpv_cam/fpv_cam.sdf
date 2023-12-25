@@ -1,0 +1,71 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+    <model name='fpv_cam'>
+    <pose>-0.158979 -0.04405 0.045074 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.015</mass>
+          <inertia>
+            <ixx>4.15e-6</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.407e-6</iyy>
+          <iyz>0</iyz>
+          <izz>2.407e-6</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.01 0.01 0.01</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.01 0.01 0.01</size>
+            </box>
+          </geometry>
+        </visual>
+        <sensor name='camera' type='camera'>
+          <camera name='__default__'>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+          <visualize>1</visualize>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <!-- <ros>
+                      <namespace>custom_camera_ns</namespace>
+                      <remapping>image_raw:=custom_img</remapping>
+                      <remapping>camera_info:=custom_info</remapping>
+                    </ros> -->
+            <camera_name>camera</camera_name>
+            <!-- <frame_name>camera_link_optical</frame_name> -->
+          </plugin>
+          
+        </sensor>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+  </model>
+</sdf>
