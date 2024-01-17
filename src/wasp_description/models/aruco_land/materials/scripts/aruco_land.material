@@ -1,0 +1,16 @@
+material aruco_zero
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        // Relative to the location of the material script
+        texture ../textures/aruco_zero.png
+        // Repeat the texture over the surface (4 per face)
+        scale 0.9 0.9
+      }
+    }
+  }
+}
