@@ -12,6 +12,7 @@ GAZEBO_PACKAGE_NAME = "wasp_gazebo"
 DESCRIPTION_PACKAGE_NAME = "wasp_description"
 WORLD = "simple.world"
 
+
 def generate_launch_description():
     pkg_share = get_package_share_directory(GAZEBO_PACKAGE_NAME)
     pkg_description = get_package_share_directory(DESCRIPTION_PACKAGE_NAME)
@@ -29,16 +30,26 @@ def generate_launch_description():
     )
 
     # source /usr/share/gazebo/setup.sh
-    resources = [os.path.join(pkg_share, "worlds"),
-                 os.path.join(pkg_description, "meshes")
-                ]
+    resources = [
+        os.path.join(pkg_share, "worlds"),
+        os.path.join(pkg_description, "meshes"),
+        os.path.join(pkg_description, "models"),
+    ]
 
     resource_env = AppendEnvironmentVariable(
         name="GAZEBO_RESOURCE_PATH", value=":".join(resources)
     )
 
-    plugins = [os.path.join(get_package_prefix(GAZEBO_PACKAGE_NAME), "lib", GAZEBO_PACKAGE_NAME)
-                ]
+    models = [os.path.join(pkg_description, "models")]
+    models_env = AppendEnvironmentVariable(
+        name="GAZEBO_MODEL_PATH", value=":".join(models)
+    )
+
+    plugins = [
+        os.path.join(
+            get_package_prefix(GAZEBO_PACKAGE_NAME), "lib", GAZEBO_PACKAGE_NAME
+        )
+    ]
 
     plugins_env = AppendEnvironmentVariable(
         name="GAZEBO_PLUGIN_PATH", value=":".join(plugins)
@@ -54,19 +65,15 @@ def generate_launch_description():
     spawn_entity = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=[
-            "-topic",
-            "robot_description",
-            "-entity",
-            "uav"
-        ],
+        arguments=["-topic", "robot_description", "-entity", "uav"],
         output="screen",
     )
 
     ld = LaunchDescription()
-    
+
     ld.add_action(plugins_env)
     ld.add_action(resource_env)
+    ld.add_action(models_env)
     ld.add_action(node_robot_state_publisher)
     ld.add_action(gazebo)
     ld.add_action(spawn_entity)
