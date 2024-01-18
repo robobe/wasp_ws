@@ -49,7 +49,8 @@ def generate_launch_description():
     plugins = [
         os.path.join(
             get_package_prefix(GAZEBO_PACKAGE_NAME), "lib", GAZEBO_PACKAGE_NAME
-        )
+        ),
+        os.path.join(pkg_share, "bin")
     ]
 
     plugins_env = AppendEnvironmentVariable(

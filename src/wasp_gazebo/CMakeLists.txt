@@ -47,6 +47,10 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(
+  DIRECTORY bin
+  DESTINATION share/${PROJECT_NAME}
+)
 
 
 ament_package()

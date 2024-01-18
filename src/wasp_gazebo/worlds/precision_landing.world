@@ -20,7 +20,7 @@
     </include>
     <include>
       <pose>0 0 0.5 0 0 0</pose>
-      <uri>model://iris_with_standoffs</uri>
+      <uri>model://iris_with_ardupilot</uri>
     </include>
     
   </world>
